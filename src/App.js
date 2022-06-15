@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import { FiSettings } from "react-icons/fi";
 
-function App() {
+const App = () => {
+  const activeMenu = true;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <div className="flex relative dark:bg-main-dark-bg">
+          <div className="fixed right-4 bottom-4 " style={{ zIndex: 1000 }}>
+            <TooltipComponent content="Settings" position="Top">
+              <button
+                type="button"
+                style={{
+                  borderRadius: "50%",
+                  backgroundColor: "blue",
+                }}
+                className="text-3xl p-3 hover:drop-shadow-xl  hover:bg-light-gray text-white"
+              >
+                <FiSettings />
+              </button>
+            </TooltipComponent>
+          </div>
+          {activeMenu ? (
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
+              Sidebar
+            </div>
+          ) : (
+            <div className="w-0 dark:bg-secondary-dark-bg">Sidebar w-0</div>
+          )}
+          <div
+            className={`dark:bg-main-bg bg-main-bg min-h-screen w-full${
+              activeMenu ? "md:ml-72" : " flex-2"
+            }`}
+          >
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
+              Navbar
+            </div>
+          </div>
+        </div>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
